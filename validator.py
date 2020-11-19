@@ -20,7 +20,7 @@ class Validator:
     def key(self):
         return os.environ.get('ODOO_JWT_KEY')
 
-    def create_token(self, user):
+    def create_token(self, user, algorithm='HS256'):
         try:
             exp = datetime.datetime.utcnow() + datetime.timedelta(days=30)
             payload = {
@@ -33,7 +33,7 @@ class Validator:
             token = jwt.encode(
                 payload,
                 self.key(),
-                algorithm='HS256'
+                algorithm=algorithm
             )
 
             self.save_token(token, user['id'], exp)
