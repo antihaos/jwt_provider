@@ -33,6 +33,8 @@ class JwtHttp:
             try:
                 # Bearer token_string
                 token = headers['Authorization'].split(' ')[1]
+                if not token and 'token' in body:
+                    token = body.pop('token')
             except Exception:
                 pass
 
