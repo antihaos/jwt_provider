@@ -7,6 +7,7 @@ class JwtAccessToken(models.Model):
     _description = 'Store user access token for one-time-login'
 
     token = fields.Char('Access Token', required=True)
+    algorithm = fields.Char('Algorithm', required=True, default='HS256')
     user_id = fields.Many2one('res.users', string='User', required=True, ondelete='cascade')
     expires = fields.Datetime('Expires', required=True)
 
